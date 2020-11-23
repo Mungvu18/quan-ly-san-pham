@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Add New Product</h2>
+<input type="text" id="newproduct" placeholder="New product ...">
+<input type="text" id="newPrime" placeholder="New prime...">
+<button onclick="addProduct()">Add</button>
+<h2>List Product Infomation</h2>
+<table id="list-product" border="1px" style="border-collapse: collapse"  ></table>
+<script>
+    // khai báo mảng sản phẩm
+    let products = [
+        ['xiaomi',"7000.000"],['samsung',"3000.000"],['nokia',"2000000"],['iphone',"1000.000"]
+    ]
+    // hàm hiển thị
+    function display(){
+        let str = `<tr>
+                   <th>Number</th>
+                   <th>Product</th>
+                   <th>Prime(VNĐ)</th>
+                   <th colspan="2">Action</th>
+                   </tr>`;
+        for (let i = 0; i < products.length; i++) {
+                str += `<tr>
+               <td>${i + 1}</td>
+               <td>${products[i][0]}</td>
+               <td>${products[i][1]}</td>
+               <td><button onclick="editProduct(${i})">edit</button></td>
+               <td><button onclick="deleteProduct(${i})">delete</button></td>
+               </tr>`;
+        }
+        document.getElementById('list-product').innerHTML = str;
+    }
+    // hàm thêm sản phầm
+    function addProduct(){
+        let a = document.getElementById('newproduct').value;
+        let b = document.getElementById('newPrime').value;
+        let arr = [a,b];
+        if(a==''||b==""){
+            alert('Mời bạn nhập lại sản phẩm')
+        }
+        else {
+            products.push(arr);
+        }
+        clearInput();
+        display();
+
+    }
+    // Hàm xóa dữ liệu ô input
+    function clearInput(){
+        document.getElementById('newPrime').value = "";
+        document.getElementById('newproduct').value = "";
+        display();
+    }
+    // hàm sửa tên sản phẩm
+    function editProduct(i){
+        let name = prompt('Nhập tên sản phẩm:');
+        let newPrime = prompt('Nhập giá sản phẩm');
+        products[i][0] = name;
+        products[i][1] = newPrime;
+        display();
+
+    }
+    // hàm xóa sản phầm
+    function deleteProduct(i){
+        products.splice(i,1);
+        display();
+    }
+    display();
+</script>
+</body>
+</html>

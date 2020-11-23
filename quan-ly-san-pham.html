@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Add New Product</h2>
+<input type="text" id="inpt">
+<button onclick="addProduct()">add</button>
+<h2>List product infomation</h2>
+<table border="1px" id="demo" style="border-collapse: collapse"></table>
+<script>
+    // khai báo mảng chứa sản phẩm
+    let products = ['cam','táo','chanh','bưởi']
+    // hàm hiển thị
+    function display(){
+        let str = `<tr>
+                   <th>STT</th>
+                   <th>Product Name</th>
+                   <th colspan="2">Action</th>
+                   </tr>`;
+        for (let i = 0; i < products.length; i++) {
+            str += `<tr>
+               <td>${i + 1}</td>
+               <td>${products[i]}</td>
+               <td><button onclick="editProduct(${i})">edit</button></td>
+               <td><button onclick="deleteProduct(${i})">delete</button></td>
+               </tr>`;
+        }
+        document.getElementById('demo').innerHTML = str;
+    }
+    // hàm thêm sản phầm
+    function addProduct() {
+        let a = document.getElementById('inpt');
+        product = a.value
+        if(product==""){
+            alert('Mời bạn nhập lại')
+        }
+        else {
+            products.push(product);
+            clear();
+            display();
+        }
+    }
+    function clear(){
+       document.getElementById('inpt').value = "";
+    }
+    // hàm sửa tên sản phầm
+    function editProduct(i){
+        let name = prompt("Mời bạn nhập sản phẩn mới:");
+        products[i] = name;
+        display();
+    }
+    // xóa tên sản phẩm
+    function deleteProduct(i){
+        products.splice(i,1);
+        display();
+
+    }
+    display();
+</script>
+</body>
+</html>
